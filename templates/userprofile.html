@@ -1,0 +1,80 @@
+{% extends "index.html" %}
+{% block content %}
+<style>
+    .itemcontainer{
+        width:90%;
+        margin: auto;
+        margin-top: 30px;
+        padding: 30px;
+    }
+    .itemcontainer input{
+        width:90%;
+    }
+</style>
+</div>
+<div class="container mt-5">
+    <br><br>
+{% for m in messages %}
+<h3 style="text-align:center;color:green">{{m}}</h3>
+  
+{% endfor %}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="itemcontainer">
+    <h2>My Profile</h2>
+    <table class="table">
+        <tr>
+            <td>Name</td>
+            <th>: {{userdata.name}}</th>
+        </tr>
+        <tr>
+            <td>House</td>
+            <th>: {{userdata.house}}</th>
+        </tr>
+        <tr>
+            <td>City</td>
+            <th>: {{userdata.city}}</th>
+        </tr>
+        <tr>
+            <td>State</td>
+            <th>: {{userdata.state}}</th>
+        </tr>
+        <tr>
+            <td>Phone</td>
+            <th>: {{userdata.phone}}</th>
+        </tr>
+        <tr>
+            <td>Total Points Earned</td>
+            <th><h3>: {{userdata.points}}</h3></th>
+        </tr>
+    </table>
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="itemcontainer">
+                <h2>Update Data</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    <label for="">Name:</label><br>
+                    <input type="text" name="name" value="{{userdata.name}}" required><br>
+                    <label for="">House:</label><br>
+                    <input type="text" name="house" value="{{userdata.house}}" required><br>
+                    <label for="">City</label><br>
+                    <input type="text" name="city" value="{{userdata.city}}" required><br>
+                    <label for="">State</label><br>
+                    <input type="text" name="state" value="{{userdata.state}}"><br>
+                    <label for="">Phone Number</label><br>
+                    <input type="text" name="phone" value="{{userdata.phone}}"><br><br>
+                    <button type="submit" class="btn btn-info">Submit</button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+  
+{% endblock %}

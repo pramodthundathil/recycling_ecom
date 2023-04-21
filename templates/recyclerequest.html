@@ -1,0 +1,50 @@
+{% extends "adminindex.html" %}
+</div>
+{% block content %}
+<style>
+    .cont{
+        background-color: white;
+        padding: 20px;
+    }
+</style>
+
+<div class="container cont">
+    <h1>Recycle Requests</h1>
+    {% for m in messages %}
+                <h6 class="text-danger">{{m}}</h6>              
+    {% endfor %}
+            
+    <table class="table">
+        <tr>
+            <th>User</th>
+            <th>Cloth Type</th>
+            <th>Weight</th>
+            <th>Numbers</th>
+            <th>Status</th>
+            <th>Action</th>
+            <th>Change Status</th>
+        </tr>
+        {% for i in recloth %}
+          
+        <tr>
+            <td>{{i.user.first_name}} <a href="" class="btn btn-dark btn-sm">View</a></td>
+            <td>{{i.clothcategory}}</td>
+            <td>{{i.clothweight}}</td>
+            <td>{{i.numberofcloth}}</td>
+            <td>{{i.status}}</td>
+            <td>
+                <a href="{%url 'ApproveReq' i.id %}" class="btn btn-outline-success btn-sm">Approve</a>
+                <a href="{%url 'RejectReq' i.id %}" class="btn btn-outline-danger btn-sm">Reject</a>
+            </td>
+            <td>
+                <a href="{%url 'CollectReq' i.id %}" class="btn btn-outline-info btn-sm">Collected</a>
+                <a href="{%url 'SentForRecycleReq' i.id%}" class="btn btn-outline-dark btn-sm">Sent For Recycle</a>
+                <a href="{%url 'RecycledReq' i.id %}" class="btn btn-outline-secondary btn-sm">Recycled</a>
+            </td>
+        </tr>
+        {% endfor %}
+
+    </table>
+</div>
+<br><br><br>
+{% endblock %}

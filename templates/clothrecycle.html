@@ -1,0 +1,147 @@
+{% extends "index.html" %}
+<br><br><br>
+{% block content %}
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
+</script>
+<style>
+    .modelcontainer {
+        width: 90%;
+        padding: 20px;
+        text-align: center;
+        margin: auto;
+        margin-top: 20px;
+
+    }
+
+    .modal-body input,
+    select {
+        width: 80%;
+        padding: 4px;
+    }
+</style>
+<!-- banner section start -->
+<!-- <div class="banner_section layout_padding">
+    <div class="container">
+       <div id="my_slider" class="carousel slide" data-ride="carousel">
+          <div class="carousel-inner">
+             <div class="carousel-item active">
+                <div class="row">
+                   <div class="col-sm-12">
+                      <h1 class="banner_taital">Recycle <br>Your Cloth</h1>
+                      <div class="buynow_bt"><a href="#">Start Shopping</a></div>
+                   </div>
+                </div>
+             </div>
+             <div class="carousel-item">
+                <div class="row">
+                   <div class="col-sm-12">
+                      <h1 class="banner_taital">Shop <br>Recycled Cloth save Enviorment</h1>
+                      <div class="buynow_bt"><a href="#">Start Shopping</a></div>
+                   </div>
+                </div>
+             </div>
+             <div class="carousel-item">
+                <div class="row">
+                   <div class="col-sm-12">
+                      <h1 class="banner_taital">Get Start <br>Your favriot shoping</h1>
+                      <div class="buynow_bt"><a href="#">Start Shopping</a></div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <a class="carousel-control-prev" href="#my_slider" role="button" data-slide="prev">
+          <i class="fa fa-angle-left"></i>
+          </a>
+          <a class="carousel-control-next" href="#my_slider" role="button" data-slide="next">
+          <i class="fa fa-angle-right"></i>
+          </a>
+       </div>
+    </div>
+ </div> -->
+<!-- banner section end -->
+</div>
+<br><br><br>
+<div class="container mt-5">
+    <div class="itemcontainer">
+        {% for m in messages %}
+<h3 style="text-align:center;color:green">{{m}}</h3>
+  
+{% endfor %}
+
+        <div class="modelcontainer mt-5">
+            <br><br><br><br><br>
+            <h2></h2>
+            <button class="btn btn-outline-dark btn-lg " data-bs-toggle="modal" data-bs-target="#exampleModal">Add
+                Cloth</button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Add Cloth</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post">
+                                {% csrf_token %}
+                                <label for="">Cloth Category</label><br>
+                                <select name="cat" id="" required>
+                                    <option value="" selected disabled>-------------</option>
+                                    <option value="Mens Cloth">Mens Cloth</option>
+                                    <option value="Womans Cloth">Womans Cloth</option>
+                                    <option value="Kids Cloth">Kids Cloth</option>
+                                    <option value="Other">Other</option>
+                                </select> <br><br>
+                                <label for="">Cloth Total Weight(in Kilograms):</label><br>
+                                <input type="number" name="weight"><br><br>
+                                <label for="">Number Of Cloths:</label><br>
+                                <input type="number" name="number"><br><br>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <table class="table">
+            <tr>
+                <th>Cloths Category</th>
+                <th>Weight</th>
+                <th>Approvels</th>
+                <th>Status</th>
+                <th>Points On Cloth</th>
+                <th>Action</th>
+            </tr>
+            {% for i in data  %}
+
+            <tr>
+                <td>{{i.clothcategory}}</td>
+                <td>{{i.clothweight}}</td>
+                {% if i.approvel == False %}
+                <td class="text-warning">Pending</td>
+                {% else %}
+                <td class="text-success">Approved</td>
+                {% endif %}
+                <td>{{i.status}}</td>
+                <td>{{i.ponits}}</td>
+                <td><a href="" class="btn btn-outline-danger btn-sm">delete</a></td>
+            </tr>
+            {% endfor %}
+
+        </table>
+    </div>
+
+</div>
+
+<br><br><br>
+{% endblock %}

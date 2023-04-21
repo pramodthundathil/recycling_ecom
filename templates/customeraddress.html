@@ -1,0 +1,35 @@
+{% extends "adminindex.html" %}
+{% block content %}
+<style>
+    .cont{
+        background-color: white;
+    }
+    .itemcontainer{
+        width: 40%;
+        height: auto;
+        padding: 20px;
+        text-align: center;
+        border: 1px solid black;
+        border-radius: 20px;
+        margin: auto;
+    }
+    .itemcontainer span{
+        color: brown;
+    }
+</style>
+
+<div class="container cont mt-5">
+    <div class="itemcontainer">
+        <h3>Delivery Address</h3>
+        <h4>Name: <span>{{prodata.name}}</span></h4>
+        <h4>House: <span>{{prodata.house}}</span></h4>
+        <h4>Place: <span>{{prodata.city}}</span></h4>
+        <h4>District: <span>{{prodata.state}}</span></h4>
+        <h4>Phone: <span>{{prodata.phone}}</span></h4>
+        <h4>State: <span>{{prodata.state}}</span></h4>
+        <h4>Country: <span>India</span></h4>
+
+    </div>
+</div>
+<br><br><br>
+{% endblock %}

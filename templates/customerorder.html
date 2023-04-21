@@ -1,0 +1,46 @@
+{% extends "adminindex.html" %}
+{% block content %}
+
+<style>
+    .cont{
+        padding: 20px;
+        background-color: white;
+    }
+</style>
+
+<div class="container cont mt-5">
+    <table class="table">
+        <tr>
+            <th>Ordered Item</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>date</th>
+            <th>Status</th>
+            <th>View Customer</th>
+            <th>Actions</th>
+        </tr>
+
+        {% for i in order %}
+        {% if i.Product.user == request.user %}
+
+        <tr>
+            <td>{{i.Product.name}}</td>
+            <td>{{i.quantity}}</td>
+            <td>{{i.price}}</td>
+            <td>{{i.date}}</td>
+            <td>{{i.status}}</td>
+            <td><a href="{%url 'ViewAddress' i.id%}" class="btn btn-outline-dark" >View</a></td>
+            <td><a href="{%url 'ChangeToDespached' i.id%}" class="btn btn-outline-info btn-sm">Despach</a>
+                <a href="{%url 'ChangeToCanceled' i.id%}" class="btn btn-outline-warning btn-sm">Cancel</a>
+                <a href="{%url 'DelateOrderMerchant' i.id%}" class="btn btn-outline-danger btn-sm">Delete</a>
+                <a href="{%url 'ChangeToDelivered' i.id%}" class="btn btn-outline-success btn-sm">Delivered</a>
+            </td>
+        </tr>
+        <!-- Button trigger modal -->
+{% endif %}
+        {% endfor %}
+
+    </table>
+</div>
+<br><br>
+{% endblock %}

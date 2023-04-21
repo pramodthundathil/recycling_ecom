@@ -1,0 +1,43 @@
+{% extends "index.html" %}
+{% block content %}
+<style>
+    .loginformcontainer{
+        width:90%;
+        margin: auto;
+        padding: 30px;
+        text-align: center;
+        background-color: whitesmoke;
+        border-radius: 20px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+
+    }
+    .loginformcontainer input{
+        width:70%;
+        padding: 5px;
+    }
+</style>
+
+<div class="banner_section layout_padding">
+    <div class="container">
+
+        <div class="loginformcontainer">
+            <h2>Login</h2><br>
+            {% for m in messages %}
+                <h6 class="text-danger">{{m}}</h6>              
+            {% endfor %}
+            <form method="post">
+                {% csrf_token %}
+                <input type="text" name="uname" placeholder="User Name"><br><br>
+                <input type="password" name="pswd" placeholder="Password"><br><br>
+                <button type="submit" class="btn btn-info">Login</button><br><br>
+                Dont have an account click <a href="{%url 'SignUp' %}">Here</a>
+
+            </form>
+
+        </div>
+       
+    
+    </div>
+ </div>
+  
+{% endblock %}
