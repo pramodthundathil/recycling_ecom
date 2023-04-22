@@ -322,4 +322,11 @@ def UplaodTutorialVideos(request):
         "videoi":videoi
     }
     return render(request,"uploadvideo.html",context)
+
+def SearchByName(request):
+    if request.method == "POST":
+        district = request.POST["val"]
+        product = Product.objects.filter(name__contains = district)
+        return render(request, "search.html",{"search":district,"product":product})
+        
     

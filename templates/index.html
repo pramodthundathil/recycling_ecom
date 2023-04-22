@@ -78,7 +78,7 @@
                      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
                      <a href="{%url 'Index' %}">Home</a>
                      <a href="{%url 'RecycleUserCloths' %}">Recycle Your Cloth</a>
-                     <a href="electronic.html">Buy Products</a>
+                     <a href="#products">Buy Products</a>
                      <!-- <a href="jewellery.html">Jewellery</a> -->
                   </div>
                   <span class="toggle_icon" onclick="openNav()"><img src="{%static 'images/toggle-icon.png' %}"></span>
@@ -94,9 +94,10 @@
                   <div class="main">
                      <!-- Another variation with a button -->
                      <div class="input-group">
-                        <form action="">
+                        <form action="{%url 'SearchByName' %}" method="post">
+                           {% csrf_token %}
                         <div class="input-group-append">
-                        <input type="text" class="form-control" placeholder="Search Products">
+                        <input type="text" class="form-control" name="val" required placeholder="Search Products">
 
                            <button class="btn btn-secondary" type="submit" style="background-color: #f26522; border-color:#f26522 ">
                            <i class="fa fa-search"></i>
@@ -190,7 +191,7 @@
       <!-- banner bg main end -->
       <!-- fashion section start -->
       <br><br>
-      <div class="fashion_section mt-5">
+      <div class="fashion_section mt-5" id="#products">
          <div id="main_slider" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">
                <div class="carousel-item active">
