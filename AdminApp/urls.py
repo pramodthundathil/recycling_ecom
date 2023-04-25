@@ -26,6 +26,8 @@ urlpatterns = [
     path("paymenthandlercus",views.paymenthandlercus,name="paymenthandlercus"),
     path("Checkoutwithpoints",views.Checkoutwithpoints,name="Checkoutwithpoints"),
     path("UplaodTutorialVideos",views.UplaodTutorialVideos,name="UplaodTutorialVideos"),
-    path("SearchByName",views.SearchByName,name="SearchByName"),   
+    path("SearchByName",views.SearchByName,name="SearchByName"),  
+    path("ClothForRecycle",views.ClothForRecycle,name="ClothForRecycle"), 
+    path("UpdateReStatus/<int:pk>",views.UpdateReStatus,name="UpdateReStatus")
     
 ]

@@ -120,6 +120,7 @@
                 <th>Approvels</th>
                 <th>Status</th>
                 <th>Points On Cloth</th>
+                <th>Cloth Convertion</th>
                 <th>Action</th>
             </tr>
             {% for i in data  %}
@@ -134,6 +135,7 @@
                 {% endif %}
                 <td>{{i.status}}</td>
                 <td>{{i.ponits}}</td>
+                <th>{{i.recycled_product}}</th>
                 <td><a href="" class="btn btn-outline-danger btn-sm">delete</a></td>
             </tr>
             {% endfor %}

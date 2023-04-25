@@ -289,24 +289,29 @@ def ViewAddress(request,pk):
 
 def Checkoutwithpoints(request):
     cartitems = CartItems.objects.filter(user = request.user)
-    UserPro = UserProfile.objects.get(user = request.user)
-    points = 0
-    for item in cartitems:
-        points = points + item.product.point
-    if points > UserPro.points:
-        messages.info(request,"You Dont Have Points To Purchase The item")
-        return redirect("Cart")
+    if UserProfile.objects.filter(user = request.user).exists():
+        UserPro = UserProfile.objects.get(user = request.user)
+        points = 0
+        for item in cartitems:
+            points = points + item.product.point
+        if points > UserPro.points:
+            messages.info(request,"You Dont Have Points To Purchase The item")
+            return redirect("Cart")
+        else:
+            cart = CartItems.objects.filter(user = request.user)
+            total = 0
+            for items in cart:
+                ckout = CheckOuts.objects.create(Product = items.product,quantity = items.quantity,price = items.price,user = request.user, status = "Item Ordered")
+                ckout.save()
+                total = total + float(items.price)
+                items.delete()
+                UserPro.points = UserPro.points - points
+                UserPro.save()
+                return render(request,"Paymentconfirm.html")
     else:
-        cart = CartItems.objects.filter(user = request.user)
-        total = 0
-        for items in cart:
-            ckout = CheckOuts.objects.create(Product = items.product,quantity = items.quantity,price = items.price,user = request.user, status = "Item Ordered")
-            ckout.save()
-            total = total + float(items.price)
-            items.delete()
-            UserPro.points = UserPro.points - points
-            UserPro.save()
-            return render(request,"Paymentconfirm.html")
+        messages.info(request,"Please Upadate User Profile")
+        return redirect('Cart')
+        
         
 def UplaodTutorialVideos(request):
     form = VideosAddForm()
@@ -328,5 +333,20 @@ def SearchByName(request):
         district = request.POST["val"]
         product = Product.objects.filter(name__contains = district)
         return render(request, "search.html",{"search":district,"product":product})
+    
+def ClothForRecycle(request):
+    rcitems = RecycleCloth.objects.filter(approvel = True)
+    context = {
+        "rcitems":rcitems
+    }
+    return render(request,"recyclepoduct.html",context)
+
+def UpdateReStatus(request,pk):
+    item = RecycleCloth.objects.get(id = pk)
+    if request.method == "POST":
+        rtype = request.POST["rtype"]
+        item.recycled_product = rtype
+        item.save()
+        return redirect('ClothForRecycle')
         
     

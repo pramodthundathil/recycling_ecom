@@ -10,6 +10,7 @@ class RecycleCloth(models.Model):
     rejection = models.BooleanField(default=False)
     status = models.CharField(max_length=255,null=True)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
+    recycled_product = models.CharField(max_length=255,null=True,blank=True)
     
 class UserProfile(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
